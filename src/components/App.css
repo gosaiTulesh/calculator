@@ -4,20 +4,29 @@
   height: 100%;
   width: 100%;
   min-width: 320px;
-  min-height: 568px;
+  min-height: 500px;
   max-width: 414px;
-  max-height: 823px;
+  max-height: 750px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.user{
+  width: 100%;
+  height: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #3da4ab;
+  position: relative;
+  top: 5px;
+  left: 10px;
+}
 .display-toolbar {
   position: fixed;
   width: 100%;
-  height: 40%;
+  height: 24%;
   left: 0;
-  top: 0;
+  top: 46px;
   display: flex;
   flex-flow: column;
   -ms-flex-flow: column;
@@ -27,9 +36,9 @@
 .buttons {
   position: fixed;
   width: 100%;
-  height: 60%;
+  height: 58%;
   left: 0;
-  top: 40%;
+  top: 33%;
   background-color: #fff;
   padding: 0.25rem;
   margin: 0;
@@ -40,13 +49,24 @@
   justify-content: space-around;
   z-index: 100;
 }
+.footer {
+  bottom: -5px;
+  position: fixed;
+  width: calc(100% - 0.25rem);
+  height: calc(10% * 4 / 5 - 0.25rem);
+  text-align: end;
+  color: #fc5d76;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+}
 
 .history {
   position: fixed;
-  width: calc(75% - 0.25rem);
-  height: calc(60% * 4 / 5 - 0.25rem);
-  left: 0;
-  bottom: 0;
+  width: calc(100% - 0.25rem);
+  height: calc(72% * 4 / 5 - 0.25rem);
+  left: 2px ;
+  bottom: 68px;
   background-color: #fff;
   border: 1px solid #c6c6c6;
   opacity: 1;

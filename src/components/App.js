@@ -1,7 +1,7 @@
 import React from 'react';
 import Buttons from './Buttons';
 import History from './History';
-import FolkMe from './Folkme';
+import Login from './Login';
 import DisplayToolbar from './DisplayToolbar';
 import * as Calculator from '../calculator-core';
 import './App.css';
@@ -13,6 +13,8 @@ export default class App extends React.Component {
     this.state = {
       formula: [],
       history: [],
+      loginSuccess: false,
+      username: '',
       input: '0',
       isShowHistory: false,
       afterCalculation: false
@@ -23,13 +25,27 @@ export default class App extends React.Component {
     this.onClear = this.onClear.bind(this);
     this.onEqual = this.onEqual.bind(this);
     this.onDecimal = this.onDecimal.bind(this);
-    this.onParenthesis = this.onParenthesis.bind(this);
     this.onBackspace = this.onBackspace.bind(this);
     this.onHistory = this.onHistory.bind(this);
     this.onHistoryItemClicked = this.onHistoryItemClicked.bind(this);
     this.onClearHistory = this.onClearHistory.bind(this);
   }
 
+  userChange = (e) =>{
+    this.setState({username:e});
+  }
+  loginUser = () =>{
+    const {username} = this.state;
+    if(username !== ''){
+      this.setState({loginSuccess:true})
+    }
+  }
+  logout = () => {
+    const {loginSuccess} = this.state;
+    if(loginSuccess){
+      this.setState({loginSuccess:!loginSuccess})
+    }
+  }
   onDigit({ target }) {
     const digit = target.innerText;
     const input = this.state.input;
@@ -91,48 +107,6 @@ export default class App extends React.Component {
         input: operator,
         afterCalculation: false
       });
-    }
-  }
-
-  onParenthesis({ target }) {
-    const parenthesis = target.innerText;
-    const input = this.state.input;
-
-    if (parenthesis === '(') {
-      if ((Calculator.isNumber(input) && input !== '0') ||
-        (Calculator.isNumber(input) && input === '0' && this.state.formula.length > 0) ||
-        input === ')') {
-        this.setState({
-          input: parenthesis,
-          formula: this.state.formula.concat([input, '*']),
-          afterCalculation: false
-        });
-      } else if (Calculator.isOperator(input) || input === '(') {
-        this.setState({
-          input: parenthesis,
-          formula: this.state.formula.concat(input),
-          afterCalculation: false
-        });
-      } else if (Calculator.isNumber(input) && input === '0' && this.state.formula.length === 0) {
-        this.setState({
-          input: parenthesis,
-          afterCalculation: false
-        });
-      }
-    } else {
-      const arrayOpenParenthesis = this.state.formula.join("").match(/\(/g);
-      const numOpenParenthesis = arrayOpenParenthesis ? arrayOpenParenthesis.length : 0;
-
-      const arrayCloseParenthesis = this.state.formula.join("").match(/\)/g);
-      const numCloseParenthesis = arrayCloseParenthesis ? arrayCloseParenthesis.length : 0;
-
-      if ((Calculator.isNumber(input) || input === ')') && numOpenParenthesis > 0 && numOpenParenthesis > numCloseParenthesis) {
-        this.setState({
-          input: parenthesis,
-          formula: this.state.formula.concat(input),
-          afterCalculation: false
-        });
-      }
     }
   }
 
@@ -223,8 +197,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
+          {this.state.loginSuccess ?
         <div className="calculator">
-          <DisplayToolbar
+          <span className="user">Hello ..... {this.state.username}</span>
+           <DisplayToolbar
             formula={this.state.formula}
             input={this.state.input}
             onBackspace={this.onBackspace}
@@ -239,26 +215,24 @@ export default class App extends React.Component {
             onDecimal={this.onDecimal}
             onDigit={this.onDigit}
             onOperator={this.onOperator}
-            onParenthesis={this.onParenthesis}
           />
 
           <History
+            username={this.state.username}
             isShowHistory={this.state.isShowHistory}
             history={this.state.history}
             onHistoryItemClicked={this.onHistoryItemClicked}
             onEqual={this.onEqual}
             onClearHistory={this.onClearHistory}
           />
+          <div onClick={this.logout} className="footer">
+            logout
+          </div>
+        </div>:
+        <div className="calculator">
+          <Login loginSuccess={this.state.loginSuccess}  username={this.state.username} loginUser={this.loginUser} userChange={this.userChange}/>
         </div>
-
-        <FolkMe
-          targetURL={this.props.githubURL}
-          color="#fff"
-          backgroundColor="#3da4ab"
-          position="right"
-          size="120px"
-          ariaLabel="View source on Github"
-        />
+        }
       </div>
     )
   }

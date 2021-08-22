@@ -33,14 +33,23 @@ export default class History extends React.Component {
 
     return (
       <div className={historyClassName}>
-        <div className="history-list" ref={this.historyList}>
+        <div className="history-list" ref={this.historyList}> 
+        <div className="history-item">
+          <div style={{display:"flex"}}>
+          <span style={{marginLeft:"10px"}}>Name</span>
+          <div className="history-item-formula">Expression</div>
+          <div className="history-item-result">Output</div>
+          </div>
+        </div>
           {
             this.props.history.map((item, index) => {
               return (
                 <div key={index} className="history-item">
+                  <div style={{display:"flex"}}>
+                  <span style={{marginLeft:"10px"}}>{this.props.username}</span>
                   <div className="history-item-formula">{item.formula.join("")}</div>
                   <div className="history-item-result" value={item.result} onClick={this.props.onHistoryItemClicked}>={item.result}</div>
-                  <hr></hr>
+                  </div>
                 </div>
               )
             })
@@ -48,7 +57,7 @@ export default class History extends React.Component {
         </div>
         <div className="bottom-btns">
           <button id="clear-history" onClick={this.props.onClearHistory}>Clear</button>
-          <button id="calculate" onClick={this.props.onEqual}>Equal</button>
+          {/* <button id="calculate" onClick={this.props.onEqual}>Equal</button> */}
         </div>
       </div>
     )

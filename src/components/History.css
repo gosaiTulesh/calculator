@@ -14,7 +14,7 @@
 
 .history-item-formula {
   color: #888;
-  padding: 15px 15px 0 15px;
+  padding: 0px 15px 0 15px;
 }
 
 .history-item-result {
@@ -29,8 +29,8 @@
 
 .bottom-btns {
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: 5px;
+  bottom: 5px;
   width: 100%;
 }
 

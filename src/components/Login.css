@@ -1,0 +1,45 @@
+.login {
+    background-color: white;
+    height: 100%;
+}
+input[type=text]{
+    width:96%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 8px;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+    top: 34%;
+    position: relative;
+  }
+  
+  input[type=text]:focus{
+    border-color:#6161dc;
+    box-shadow:0 0 8px 0 #6161dc;
+  }
+  .loginUser{
+    height: 200px;
+    width: 101%;
+    font-size: 25px;
+    font-weight: bold;
+    position: relative;
+    top: 28%;
+    left: 36%;
+    color: #6161dc;
+  }
+  .loginBtn {
+    height: 44px;
+    width: 106px;
+    color: #6161dc;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #6161dc;
+    border-radius: 5px;
+    position: relative;
+    top: 40%;
+    left: 40%;
+  }
