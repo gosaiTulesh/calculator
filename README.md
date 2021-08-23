@@ -10,8 +10,8 @@ total 3 screen
 
 after git clone
 
-# npm install
-first npm install for dependancy install.
+# yarn install
+first yarn install for dependancy install.
 
-# npm start
-npm start after npm install for run project.
+# yarn start
+yarn start after yarn install for run project.
